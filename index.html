@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry, My Love ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+        body {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        h1 {
+            font-size: 50px;
+            color: #ff3366;
+            animation: heartbeat 2s infinite;
+        }
+        p {
+            font-size: 26px;
+            color: white;
+            max-width: 700px;
+            margin: 20px;
+            font-weight: bold;
+        }
+        button {
+            padding: 15px 40px;
+            font-size: 20px;
+            color: white;
+            background-color: #ff3366;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #cc0044;
+            transform: scale(1.1);
+        }
+        .rose {
+            position: absolute;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            animation: rise 5s ease-in-out forwards;
+            display: none;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: float 4s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-500px) rotate(360deg); opacity: 0; }
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes rise {
+            0% { bottom: -200px; opacity: 0; }
+            100% { bottom: 50px; opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>I'm Sorry, My Love ❤️</h1>
+    <p id="apologyMessage">Click the button to see how much I love and regret hurting you.</p>
+    <button onclick="generateApology()">Forgive Me? 🥺</button>
+    <div class="rose" id="rose">🌹</div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        function generateApology() {
+            const messages = [
+                "My love, I'm truly sorry. You are my world, and I hate to see you upset. 💔",
+                "Please forgive me. I promise to cherish and adore you every single day. ❤️",
+                "I can't imagine my life without your smile. Let's make things right. 🥺",
+                "You are my heart, my soul, my everything. Please give me another chance. 💕",
+                "I wish I could turn back time and erase my mistake. You mean everything to me. 🌹",
+                "No words can express how much I regret hurting you. You are my happiness. 🌸",
+                "I will do anything to see you smile again. You are my forever. 💖"
+            ];
+            let index = 0;
+            let message = messages[Math.floor(Math.random() * messages.length)];
+            let displayMessage = "";
+            let interval = setInterval(() => {
+                displayMessage += message[index];
+                document.getElementById("apologyMessage").innerText = displayMessage;
+                index++;
+                if (index === message.length) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        document.getElementById("rose").style.display = "block";
+                    }, 1000);
+                }
+            }, 50);
+
+            createHearts();
+            document.getElementById("bgMusic").play();
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+                heart.style.fontSize = Math.random() * 20 + 20 + "px";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }
+        }
+    </script>
+
+</body>
+</html>
